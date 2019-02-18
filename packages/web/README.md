@@ -1,1 +1,3 @@
-Quasar Starter Kit Client Web Site
+# Quasar App
+
+> WIP

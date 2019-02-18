@@ -1,0 +1,12 @@
+/packages/*/.quasar
+/packages/*/node_modules
+/packages/*/dist
+/packages/*/*.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
