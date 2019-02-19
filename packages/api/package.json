@@ -16,9 +16,13 @@
     "url": "git+https://github.com/gregory-latinier/quasar-starter-kit.git"
   },
   "scripts": {
+    "dev": "node index.js",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/gregory-latinier/quasar-starter-kit/issues"
+  },
+  "dependencies": {
+    "hapi": "18.1.0"
   }
 }
