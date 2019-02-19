@@ -5,6 +5,6 @@
     "dev": "lerna run dev --stream"
   },
   "devDependencies": {
-    "lerna": "^3.13.0"
+    "lerna": "3.13.0"
   }
 }
