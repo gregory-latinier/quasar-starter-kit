@@ -2,7 +2,7 @@
 /packages/*/node_modules
 /packages/*/dist
 /packages/*/*.log*
-
+/packages/*/.env
 # Editor directories and files
 .idea
 .vscode
