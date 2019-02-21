@@ -1,8 +1,7 @@
 const Mongoose = require('mongoose')
 const Glob = require('glob')
 const Path = require('path')
-
-const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1)
+const ChangeCase = require('change-case')
 
 const plugin = {
   name: 'mongodb',
@@ -16,7 +15,7 @@ const plugin = {
     Glob.sync('../database/models/**/*.js').forEach((file) => {
       const { name } = Path.parse(file)
       const model = require(Path.resolve(file))
-      models[capitalize(name)] = Mongoose.model(capitalize(name), model.schema, model.collection)
+      models[ChangeCase.pascalCase(name)] = Mongoose.model(ChangeCase.pascalCase(name), model.schema, model.collection)
     })
 
     server.decorate('request', 'mongodb', {
