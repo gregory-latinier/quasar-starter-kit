@@ -23,11 +23,13 @@
     "url": "https://github.com/gregory-latinier/quasar-starter-kit/issues"
   },
   "dependencies": {
+    "boom": "7.3.0",
     "change-case": "3.1.0",
     "dotenv": "6.2.0",
     "glob": "7.1.3",
     "hapi": "18.1.0",
     "hapi-mongoose2": "2.0.2",
+    "jsonwebtoken": "8.5.0",
     "mongoose": "5.4.13",
     "ramda": "0.26.1"
   },
