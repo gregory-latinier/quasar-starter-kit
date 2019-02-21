@@ -6,7 +6,10 @@ const Routes = require('./plugins/routes')
 // Create a server with a host and port
 const server = Hapi.server({
   host: 'localhost',
-  port: process.env.PORT || 5000
+  port: process.env.PORT || 5000,
+  routes: {
+    cors: true
+  }
 })
 
 server.route({

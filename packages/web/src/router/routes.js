@@ -3,7 +3,15 @@ const routes = [
     path: '/',
     component: () => import('layouts/anonymous.vue'),
     children: [
-      { path: '', component: () => import('pages/index.vue') }
+      { path: '', component: () => import('pages/index.vue') },
+      { path: '/login', component: () => import('pages/login.vue') }
+    ]
+  },
+  {
+    path: '/',
+    component: () => import('layouts/authenticated.vue'),
+    children: [
+      { path: '/authenticated', component: () => import('pages/authenticated.vue') }
     ]
   }
 ]
