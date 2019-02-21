@@ -10,8 +10,12 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/authenticated.vue'),
+    meta: { auth: true },
     children: [
-      { path: '/authenticated', component: () => import('pages/authenticated.vue') }
+      {
+        path: '/authenticated',
+        component: () => import('pages/authenticated.vue')
+      }
     ]
   }
 ]
