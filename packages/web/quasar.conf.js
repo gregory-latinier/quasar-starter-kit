@@ -1,4 +1,4 @@
-// Configuration for your app
+require('dotenv').config()
 
 module.exports = function (ctx) {
   return {
@@ -25,19 +25,23 @@ module.exports = function (ctx) {
     // framework: 'all', // --- includes everything; for dev only!
     framework: {
       components: [
-        'QLayout',
-        'QHeader',
-        'QDrawer',
-        'QPageContainer',
-        'QPage',
-        'QToolbar',
-        'QToolbarTitle',
         'QBtn',
+        'QCard',
+        'QCardActions',
+        'QCardSection',
+        'QDrawer',
+        'QHeader',
         'QIcon',
-        'QList',
+        'QInput',
         'QItem',
+        'QItemLabel',
         'QItemSection',
-        'QItemLabel'
+        'QLayout',
+        'QList',
+        'QPage',
+        'QPageContainer',
+        'QToolbar',
+        'QToolbarTitle'
       ],
 
       directives: [
@@ -46,6 +50,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
+        'Cookies',
         'Notify'
       ]
 
@@ -56,6 +61,9 @@ module.exports = function (ctx) {
     supportIE: false,
 
     build: {
+      env: {
+        API: process.env.API,
+      },
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // vueCompiler: true,
@@ -68,6 +76,11 @@ module.exports = function (ctx) {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /node_modules/
+        })
+
+        cfg.module.rules.push({
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
         })
       }
     },

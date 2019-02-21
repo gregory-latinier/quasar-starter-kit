@@ -1,10 +1,17 @@
-
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MyLayout.vue'),
+    component: () => import('layouts/anonymous.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: '', component: () => import('pages/index.vue') },
+      { path: '/login', component: () => import('pages/login.vue') }
+    ]
+  },
+  {
+    path: '/',
+    component: () => import('layouts/authenticated.vue'),
+    children: [
+      { path: '/authenticated', component: () => import('pages/authenticated.vue') }
     ]
   }
 ]
@@ -13,7 +20,7 @@ const routes = [
 if (process.env.MODE !== 'ssr') {
   routes.push({
     path: '*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('pages/404.vue')
   })
 }
 
