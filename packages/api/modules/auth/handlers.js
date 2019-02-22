@@ -1,5 +1,6 @@
 const Boom = require('boom')
 const JWT = require('jsonwebtoken')
+const { RefreshToken, User } = require('../../plugins/mongodb')
 
 /**
  * Generate an access for the authenticated user
@@ -46,7 +47,6 @@ const generateRefreshToken = (uid) => JWT.sign({ uid }, process.env.JWT_SECRET)
  * @author Grégory LATINIER
  */
 const token = async (req, h) => {
-  const { RefreshToken, User } = req.mongodb.models
   const user = await User.findOne({ username: req.payload.username })
   if (user && user.checkPassword(req.payload.password)) {
     const tokenData = {
@@ -68,6 +68,7 @@ const token = async (req, h) => {
       refresh_token: refreshToken
     })
   }
+
   throw Boom.badData('auth.wrongUserPassword')
 }
 
