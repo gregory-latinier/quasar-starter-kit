@@ -1,6 +1,6 @@
 require('dotenv').config()
 const Hapi = require('hapi')
-const MongoDB = require('./plugins/mongodb')
+const { plugin: MongoDB } = require('./plugins/mongodb')
 const Routes = require('./plugins/routes')
 
 // Create a server with a host and port
