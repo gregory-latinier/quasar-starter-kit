@@ -1,8 +1,8 @@
 {
-  "name": "web",
+  "name": "web-admin",
   "version": "0.0.1",
-  "description": "Quasar Starter Kit Web App",
-  "productName": "QSK Web client",
+  "description": "Quasar Starter Kit Admin App",
+  "productName": "QSK Web Admin",
   "cordovaId": "org.cordova.quasar.app",
   "author": "gregory-latinier <gregory.latinier@gmail.com>",
   "private": true,
