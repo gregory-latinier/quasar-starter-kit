@@ -1,4 +1,6 @@
 const Handlers = require('./handlers')
+const Validate = require('./validate')
+
 const routes = []
 
 routes.push([
@@ -7,7 +9,8 @@ routes.push([
     path: '/oauth/token',
     handler: (req, h) => Handlers.token(req, h),
     options: {
-      tags: ['auth']
+      tags: ['auth'],
+      validate: Validate.token
     }
   },
   {

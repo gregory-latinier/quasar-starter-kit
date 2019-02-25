@@ -10,5 +10,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+.q-notification__message
+  white-space pre-wrap
 </style>

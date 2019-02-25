@@ -2,6 +2,19 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  form: {
+    errors: {
+      any: {
+        empty: 'The \'{field}\' is required'
+      },
+      string: {
+        base: 'The \'{field}\' is required',
+        email: 'The \'{field}\' must be a valid email'
+      }
+    },
+    fields: {
+      password: 'Password',
+      username: 'Username'
+    }
+  }
 }

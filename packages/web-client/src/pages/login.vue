@@ -51,8 +51,18 @@ export default {
           })
         }
       } catch (err) {
-        // TODO handle wrong username / password
-        console.log(err)
+        if (err.response.status === 400) {
+          let message = ''
+          err.response.data.forEach((error) => {
+            message += this.$t(`form.errors.${error.message}`, { field: this.$t(`form.fields.${error.field}`) }) + '\n'
+          })
+          this.$q.notify({
+            message,
+            color: 'negative',
+            icon: 'warning',
+            position: 'bottom-right'
+          })
+        }
       }
       this.submitting = false
     }
@@ -68,13 +78,13 @@ q-page.flex.flex-center
         v-model="loginForm.username"
         type="email"
         stack-label
-        label="Email"
+        :label="$t('form.fields.username')"
       )
       q-input(
         v-model="loginForm.password"
         :type="isPwd ? 'password' : 'text'"
         stack-label
-        label="Password"
+        :label="$t('form.fields.password')"
       )
         q-icon(
           slot="append"
