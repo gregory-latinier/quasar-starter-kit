@@ -19,12 +19,12 @@ const generateAccessToken = ({
   scopes = ['user'],
   expiresIn = 30
 }) => JWT.sign({
-    uid,
-    username,
-    scopes
-  }, process.env.JWT_SECRET, {
-    expiresIn: `${expiresIn} days`
-  })
+  uid,
+  username,
+  scopes
+}, process.env.JWT_SECRET, {
+  expiresIn: `${expiresIn} days`
+})
 
 /**
  * Generate a refresh token for the user
