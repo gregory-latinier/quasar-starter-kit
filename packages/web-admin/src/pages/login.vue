@@ -49,6 +49,8 @@ export default {
           this.$router.push({
             path: 'authenticated'
           })
+        } else {
+          this.$q.notify('Not authorized')
         }
       } catch (err) {
         // TODO handle wrong username / password
