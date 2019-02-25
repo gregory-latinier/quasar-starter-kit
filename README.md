@@ -49,10 +49,8 @@ Happy developing!
 
 ### Roadmap
 
-- Repo: Precommit hooks
 - Repo: Greenkeeper
 - Projects: Sentry logs
-- API: Linting
 - API: authenticated / optional endpoints with scopes
 - API: endpoints validation
 - Admin app: sample CRUD for the users

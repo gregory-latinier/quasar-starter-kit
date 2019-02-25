@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "quasar dev -m ssr -t mat",
     "lint": "eslint --ext .js,.vue src",
+    "precommit": "yarn lint",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
