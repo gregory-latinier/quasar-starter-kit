@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "nodemon --delay 2500ms --watch ./",
     "lint": "eslint --ext .js modules plugins",
+    "precommit": "yarn lint",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
