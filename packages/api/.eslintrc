@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "indent": [2, 2]
+  }
+}
