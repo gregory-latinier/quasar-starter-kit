@@ -13,8 +13,20 @@ const routes = [
     meta: { auth: true },
     children: [
       {
-        path: '/authenticated',
-        component: () => import('pages/authenticated.vue')
+        path: '/dashboard',
+        component: () => import('pages/dashboard.vue')
+      },
+      {
+        path: '/users/list',
+        component: () => import('pages/users/list/list.vue')
+      },
+      {
+        path: '/users/new',
+        component: () => import('pages/users/create-update/create-update.vue')
+      },
+      {
+        path: '/users/{id}',
+        component: () => import('pages/users/create-update/create-update.vue')
       }
     ]
   }

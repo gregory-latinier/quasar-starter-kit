@@ -1,12 +1,12 @@
 <script>
 export default {
-  name: 'page-authenticated'
+  name: 'page-users-create-update'
 }
 </script>
 
 <template lang="pug">
-q-page.flex.flex-center
-  | Authenticated page
+q-page
+  | Create update client
 </template>
 
 <style lang="stylus">

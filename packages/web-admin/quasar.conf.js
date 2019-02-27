@@ -30,6 +30,7 @@ module.exports = function (ctx) {
         'QCardActions',
         'QCardSection',
         'QDrawer',
+        'QExpansionItem',
         'QHeader',
         'QIcon',
         'QInput',
@@ -40,6 +41,7 @@ module.exports = function (ctx) {
         'QList',
         'QPage',
         'QPageContainer',
+        'QScrollArea',
         'QToolbar',
         'QToolbarTitle'
       ],

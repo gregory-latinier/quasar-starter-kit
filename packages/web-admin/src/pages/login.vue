@@ -47,7 +47,7 @@ export default {
           })
           this.setUsername(token.username)
           this.$router.push({
-            path: 'authenticated'
+            path: 'dashboard'
           })
         } else {
           this.$q.notify('Not authorized')
