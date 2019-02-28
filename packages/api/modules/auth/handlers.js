@@ -51,7 +51,8 @@ const token = async (req, h) => {
   if (user && user.checkPassword(req.payload.password)) {
     const tokenData = {
       uid: user._id,
-      username: user.username
+      username: user.username,
+      scopes: user.scopes
     }
 
     const refreshToken = generateRefreshToken(user._id)

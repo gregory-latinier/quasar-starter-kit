@@ -34,6 +34,11 @@ server.ext('onPreResponse', (request, h) => {
     res.statusCode = 400
     return res
   }
+
+  // There is an unhandled exception
+  if (response.isBoom) {
+    console.log(response)
+  }
   return h.continue
 });
 const start =  async () => {

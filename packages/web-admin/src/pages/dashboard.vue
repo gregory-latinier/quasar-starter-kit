@@ -6,7 +6,7 @@ export default {
 
 <template lang="pug">
 q-page.flex.flex-center
-  | Authenticated page
+  | Dashboard
 </template>
 
 <style lang="stylus">
