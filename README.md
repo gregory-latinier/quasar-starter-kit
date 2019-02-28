@@ -51,7 +51,6 @@ Happy developing!
 
 - Repo: Greenkeeper
 - Projects: Sentry logs
-- API: authenticated / optional endpoints with scopes
 - Client app: edit profile example
 - Web apps: form validation util using the built-in quasar features
 - Sample micro service using the database package

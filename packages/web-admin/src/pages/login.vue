@@ -1,7 +1,5 @@
 <script>
-import jwt from 'jsonwebtoken'
-import { mapMutations } from 'vuex'
-import { Cookies } from 'quasar'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'page-login',
@@ -16,47 +14,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', ['setUsername']),
+    ...mapActions('auth', ['login']),
     async submit () {
       this.submitting = true
-      try {
-        const response = await this.$axios({
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          url: `${process.env.API}/oauth/token`,
-          method: 'post',
-          data: this.loginForm
-        })
-
-        const { access_token: accessToken, refresh_token: refreshToken } = response
-        const token = jwt.decode(accessToken)
-        // Only users can connect to the app, it will prevent admin accounts to use the app
-        if (token.scopes.includes('admin')) {
-          let domain = window.location.hostname
-          domain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1) + 1)
-
-          Cookies.set('access_token', accessToken, {
-            path: '/',
-            domain
-          })
-          Cookies.set('refresh_token', refreshToken, {
-            path: '/',
-            domain
-          })
-          this.setUsername(token.username)
-          this.$router.push({
-            path: 'dashboard'
-          })
-        } else {
-          this.$q.notify('Not authorized')
-        }
-      } catch (err) {
-        // TODO handle wrong username / password
-        console.log(err)
-      }
+      await this.login(this.loginForm)
       this.submitting = false
+      this.$router.push({
+        path: 'dashboard'
+      })
     }
   }
 }

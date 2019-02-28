@@ -9,6 +9,7 @@ routes.push([
     path: '/v1/users',
     handler: (req, h) => Handlers.loadUsers(req, h),
     options: {
+      auth: { access: { scope: 'admin' } },
       tags: ['users'],
       validate: Validate.loadUsers
     }
@@ -18,6 +19,7 @@ routes.push([
     path: '/v1/users/{id}',
     handler: (req, h) => Handlers.loadUser(req, h),
     options: {
+      auth: { access: { scope: 'admin' } },
       tags: ['users'],
       validate: Validate.loadUser
     }
@@ -27,6 +29,7 @@ routes.push([
     path: '/v1/users/field/{id}',
     handler: (req, h) => Handlers.updateField(req, h),
     options: {
+      auth: { access: { scope: 'admin' } },
       tags: ['users'],
       validate: Validate.updateField
     }
@@ -36,6 +39,7 @@ routes.push([
     path: '/v1/users',
     handler: (req, h) => Handlers.saveUser(req, h),
     options: {
+      auth: { access: { scope: 'admin' } },
       tags: ['users'],
       validate: Validate.saveUser
     }

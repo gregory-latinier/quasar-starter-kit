@@ -1,3 +1,5 @@
 export default () => ({
-  username: null
+  username: null,
+  accessToken: null,
+  refreshToken: null
 })

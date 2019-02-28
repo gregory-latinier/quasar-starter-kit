@@ -9,6 +9,7 @@ routes.push([
     path: '/oauth/token',
     handler: (req, h) => Handlers.token(req, h),
     options: {
+      auth: false,
       tags: ['auth'],
       validate: Validate.token
     }
