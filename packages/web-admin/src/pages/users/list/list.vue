@@ -75,6 +75,7 @@ q-page.q-pa-md.column.items-end
     :loading="loading"
     @request="onRequest"
     binary-state-sort
+    :rows-per-page-options="[10, 20, 50, 100]"
   )
     template(v-slot:body="props")
       q-tr(:props="props")
