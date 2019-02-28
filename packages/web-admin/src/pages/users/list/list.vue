@@ -29,9 +29,11 @@ export default {
     }
   },
   async mounted () {
-    await this.loadUsers({
-      ...this.pagination
-    })
+    if (this.users.length === 0) {
+      await this.loadUsers({
+        ...this.pagination
+      })
+    }
   },
   methods: {
     ...mapActions('users', ['loadUsers', 'updateField']),
@@ -64,7 +66,7 @@ q-page.q-pa-md
     :data="users"
     :columns="columns"
     row-key="_id"
-    :pagination.sync="pagination"
+    :pagination="pagination"
     :loading="loading"
     @request="onRequest"
     binary-state-sort
