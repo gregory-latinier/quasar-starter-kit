@@ -1,5 +1,6 @@
 require('dotenv').config()
 const Hapi = require('hapi')
+const AuthJWT = require('./plugins/auth-jwt')
 const { plugin: MongoDB } = require('./plugins/mongodb')
 const Routes = require('./plugins/routes')
 
@@ -43,6 +44,7 @@ server.ext('onPreResponse', (request, h) => {
 });
 const start =  async () => {
   try {
+    await server.register(AuthJWT)
     await server.register(MongoDB)
     await server.register(Routes)
     await server.start()
