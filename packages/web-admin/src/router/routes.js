@@ -25,7 +25,7 @@ const routes = [
         component: () => import('pages/users/create-update/create-update.vue')
       },
       {
-        path: '/users/{id}',
+        path: '/users/:id',
         component: () => import('pages/users/create-update/create-update.vue')
       }
     ]

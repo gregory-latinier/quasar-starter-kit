@@ -61,8 +61,13 @@ export default {
 </script>
 
 <template lang="pug">
-q-page.q-pa-md
-  q-table(
+q-page.q-pa-md.column.items-end
+  q-btn(
+    color="primary"
+    label="New client"
+    to="/users/new"
+  )
+  q-table.q-mt-md.full-width(
     :data="users"
     :columns="columns"
     row-key="_id"
@@ -90,7 +95,19 @@ q-page.q-pa-md
               autofocus
             )
         q-td(key="actions", :props="props")
-          q-icon(name="delete")
+          q-btn(
+            color="primary"
+            icon="edit"
+            :to="{ path: `/users/${props.row._id}` }"
+            dense
+            flat
+          )
+          q-btn(
+            color="red"
+            icon="delete"
+            dense
+            flat
+          )
 </template>
 
 <style lang="stylus">

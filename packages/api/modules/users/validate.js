@@ -4,8 +4,14 @@ const loadUsers = {
   query: {
     page: Joi.number().min(1).required(),
     limit: Joi.number().required().allow(10, 20, 50, 100),
-    col: Joi.string().required().allow('username', 'createdAt'),
-    dir: Joi.string().required().allow('asc', 'desc')
+    col: Joi.string().required().valid('username', 'createdAt'),
+    dir: Joi.string().required().valid('asc', 'desc')
+  }
+}
+
+const loadUser = {
+  params: {
+    id: Joi.string().min(1).required()
   }
 }
 
@@ -19,7 +25,17 @@ const updateField = {
   }
 }
 
+const saveUser = {
+  payload: {
+    _id: Joi.string().optional().allow(null),
+    username: Joi.string().email().required(),
+    password: Joi.string().optional().allow(null)
+  }
+}
+
 module.exports = {
   loadUsers,
-  updateField
+  loadUser,
+  updateField,
+  saveUser
 }

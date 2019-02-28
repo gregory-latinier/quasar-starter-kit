@@ -35,3 +35,26 @@ export const updateField = async (context, form) => {
     context.commit('updateField', form)
   }
 }
+
+export const loadUser = async (context, id) => {
+  const response = await axios({
+    headers: {
+      'Accept': 'application/json'
+    },
+    method: 'GET',
+    url: `${process.env.API}/v1/users/${id}`
+  })
+  return response.data
+}
+
+export const saveUser = async (context, data) => {
+  const response = await axios({
+    headers: {
+      'Accept': 'application/json'
+    },
+    method: 'POST',
+    url: `${process.env.API}/v1/users`,
+    data
+  })
+  return response.data
+}
