@@ -17,6 +17,21 @@ const loadUsers = async (req, h) => {
   })
 }
 
+const updateField = async (req, h) => {
+  const { id } = req.params
+  const { field, value } = req.payload
+  await User.findOneAndUpdate({
+    _id: id
+  },
+  {
+    $set: { [field]: value }
+  })
+  return h.response({
+    success: true
+  })
+}
+
 module.exports = {
-  loadUsers
+  loadUsers,
+  updateField
 }

@@ -41,8 +41,11 @@ module.exports = function (ctx) {
         'QList',
         'QPage',
         'QPageContainer',
+        'QPopupEdit',
         'QScrollArea',
         'QTable',
+        'QTd',
+        'QTr',
         'QToolbar',
         'QToolbarTitle'
       ],

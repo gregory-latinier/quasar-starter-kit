@@ -9,6 +9,17 @@ const loadUsers = {
   }
 }
 
+const updateField = {
+  params: {
+    id: Joi.string().required()
+  },
+  payload: {
+    field: Joi.string().required().valid('username'),
+    value: Joi.string().required()
+  }
+}
+
 module.exports = {
-  loadUsers
+  loadUsers,
+  updateField
 }
