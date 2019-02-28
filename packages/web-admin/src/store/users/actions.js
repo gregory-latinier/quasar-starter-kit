@@ -1,16 +1,22 @@
 import axios from 'axios'
 
-export const loadUsers = async (context, { page, limit, col, dir }) => {
+export const loadUsers = async (context, { page, rowsPerPage, sortBy, descending }) => {
   const response = await axios({
     headers: {
       'Accept': 'application/json'
     },
     method: 'GET',
-    url: `${process.env.API}/v1/users?page=${page}&limit=${limit}&col=${col}&dir=${dir}`
+    url: `${process.env.API}/v1/users?page=${page}&limit=${rowsPerPage}&col=${sortBy}&dir=${descending ? 'desc' : 'asc'}`
   })
 
   context.commit('setUsers', {
-    users: response.data,
-    pagination: { page, limit, col, dir }
+    users: response.data.data,
+    pagination: {
+      page,
+      rowsPerPage,
+      sortBy,
+      descending,
+      rowsNumber: response.data.total
+    }
   })
 }

@@ -2,8 +2,9 @@ export default () => ({
   users: [],
   pagination: {
     page: 1,
-    limit: 20,
-    col: 'username',
-    dir: 'asc'
+    rowsPerPage: 5,
+    sortBy: 'username',
+    descending: false,
+    rowsNumber: 0
   }
 })
