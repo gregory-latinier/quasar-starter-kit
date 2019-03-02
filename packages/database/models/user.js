@@ -5,6 +5,8 @@ const Schema = Mongoose.Schema
 
 const schema = new Schema({
   username: { type: String, required: true, index: { unique: true } },
+  firstName: { type: String },
+  lastName: { type: String },
   salt: { type: String },
   hashedPassword: { type: String },
   scopes: { type: Array, required: true },

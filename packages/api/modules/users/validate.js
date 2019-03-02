@@ -4,7 +4,7 @@ const loadUsers = {
   query: {
     page: Joi.number().min(1).required(),
     limit: Joi.number().required().allow(10, 20, 50, 100),
-    col: Joi.string().required().valid('username', 'createdAt'),
+    col: Joi.string().required().valid('username', 'lastName', 'firstName'),
     dir: Joi.string().required().valid('asc', 'desc')
   }
 }
@@ -29,6 +29,8 @@ const saveUser = {
   payload: {
     _id: Joi.string().optional().allow(null),
     username: Joi.string().email().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
     password: Joi.string().optional().allow(null)
   }
 }

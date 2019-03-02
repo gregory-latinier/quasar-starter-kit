@@ -43,6 +43,15 @@ routes.push([
       tags: ['users'],
       validate: Validate.saveUser
     }
+  },
+  {
+    method: 'POST',
+    path: '/v1/users/isemailused',
+    handler: (req, h) => Handlers.isEmailUsed(req, h),
+    options: {
+      auth: { access: { scope: 'admin' } },
+      tags: ['users']
+    }
   }
 ])
 
