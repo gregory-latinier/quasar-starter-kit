@@ -62,3 +62,16 @@ export const saveUser = async (context, data) => {
   })
   return response.data
 }
+
+export const isEmailUsed = async (context, data) => {
+  const response = await axios({
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': context.rootState.auth.accessToken
+    },
+    method: 'POST',
+    url: `${process.env.API}/v1/users/isemailused`,
+    data
+  })
+  return response.data
+}

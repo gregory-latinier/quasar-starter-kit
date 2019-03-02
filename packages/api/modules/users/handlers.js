@@ -1,4 +1,5 @@
 const Crypto = require('crypto')
+const Mongoose = require('mongoose')
 const { User } = require('../../plugins/mongodb')
 
 const loadUsers = async (req, h) => {
@@ -9,7 +10,7 @@ const loadUsers = async (req, h) => {
     .skip((page - 1) * parseInt(limit))
     .limit(parseInt(limit))
     .sort({ [col]: dir })
-    .select('createdAt username')
+    .select('createdAt username firstName lastName')
 
   const total = await User.countDocuments({ scopes: { $elemMatch: { $eq: 'user' } } })
   return h.response({
@@ -24,7 +25,7 @@ const loadUser = async (req, h) => {
     _id: id,
     scopes: { $elemMatch: { $eq: 'user' } }
   })
-    .select('username')
+    .select('username firstName lastName')
     .lean()
   return h.response(user)
 }
@@ -44,40 +45,48 @@ const updateField = async (req, h) => {
 }
 
 const saveUser = async (req, h) => {
-  const { _id, username, password } = req.payload
+  const { _id, password, ...user } = req.payload
   if (!_id) {
     const result = await User.create({
-      username,
+      ...user,
       scopes: ['user']
     })
-    return {
-      _id: result._id,
-      username: result.username
-    }
+    return h.response({
+      ...user,
+      _id: result._id
+    })
   } else {
-    const data = { username }
-
     if (password) {
       const salt = Crypto.randomBytes(128).toString('hex')
-      data.salt = salt
-      data.hashedPassword = Crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
+      user.salt = salt
+      user.hashedPassword = Crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
     }
     const result = await User.findOneAndUpdate(
       { _id },
-      { $set: data },
+      { $set: user },
       { new: true }
     )
 
-    return {
+    return h.response({
       _id: result._id,
-      username: result.username
-    }
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName
+    })
   }
+}
+
+const isEmailUsed = async (req, h) => {
+  return h.response(await User.countDocuments({
+    _id: { $ne: Mongoose.Types.ObjectId(req.payload._id) },
+    username: req.payload.username
+  }))
 }
 
 module.exports = {
   loadUsers,
   loadUser,
   updateField,
-  saveUser
+  saveUser,
+  isEmailUsed
 }

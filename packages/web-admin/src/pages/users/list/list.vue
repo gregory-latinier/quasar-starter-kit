@@ -16,6 +16,24 @@ export default {
 
         },
         {
+          name: 'firstName',
+          required: true,
+          label: 'First name',
+          align: 'left',
+          field: row => row.firstName,
+          sortable: true
+
+        },
+        {
+          name: 'lastName',
+          required: true,
+          label: 'Last name',
+          align: 'left',
+          field: row => row.lastName,
+          sortable: true
+
+        },
+        {
           name: 'actions',
           align: 'right'
         }
@@ -95,6 +113,10 @@ q-page.q-pa-md.column.items-end
               dense
               autofocus
             )
+        q-td(key="firstName", :props="props")
+          | {{ props.row.firstName }}
+        q-td(key="lastName", :props="props")
+          | {{ props.row.lastName }}
         q-td(key="actions", :props="props")
           q-btn(
             color="primary"
