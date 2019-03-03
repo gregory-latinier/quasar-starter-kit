@@ -1,13 +1,23 @@
 <script>
+import { isEmail } from 'validator'
 import { mapActions } from 'vuex'
+import { validation } from 'src/mixins/validation'
 
 export default {
   name: 'page-login',
+  mixins: [validation],
   data () {
     return {
-      loginForm: {
+      form: {
         username: null,
         password: null
+      },
+      formRules: {
+        username: [
+          val => !!val || this.$t('validations.errors.required'),
+          val => isEmail(val) || this.$t('validations.errors.email')
+        ],
+        password: [val => !!val || this.$t('validations.errors.required')]
       },
       isPwd: true,
       submitting: false
@@ -16,8 +26,9 @@ export default {
   methods: {
     ...mapActions('auth', ['login']),
     async submit () {
+      if (!this.validate(this.formRules)) return
       this.submitting = true
-      await this.login(this.loginForm)
+      await this.login(this.form)
       this.submitting = false
       this.$router.push({
         path: 'dashboard'
@@ -32,16 +43,22 @@ q-page.flex.flex-center
   q-card.login-form
     q-card-section
       q-input(
-        v-model="loginForm.username"
+        ref="username"
+        v-model="form.username"
         type="email"
         stack-label
         label="Email"
+        :rules="formRules.username"
+        lazy-rules
       )
       q-input(
-        v-model="loginForm.password"
+        ref="password"
+        v-model="form.password"
         :type="isPwd ? 'password' : 'text'"
         stack-label
         label="Password"
+        :rules="formRules.password"
+        lazy-rules
       )
         q-icon(
           slot="append"
@@ -57,7 +74,3 @@ q-page.flex.flex-center
         :loading="submitting"
       )
 </template>
-
-<style lang="stylus">
-
-</style>
