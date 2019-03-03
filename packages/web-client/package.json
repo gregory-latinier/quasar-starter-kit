@@ -10,7 +10,7 @@
     "dev": "quasar dev -m ssr -t mat",
     "lint": "eslint --ext .js,.vue src",
     "precommit": "yarn lint",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "yarn lint"
   },
   "dependencies": {
     "quasar": "1.0.0-beta.2"

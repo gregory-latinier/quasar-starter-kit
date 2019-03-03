@@ -2,7 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "dev": "lerna run dev --stream"
+    "dev": "lerna run dev --stream",
+    "test": "lerna run test --stream"
   },
   "devDependencies": {
     "husky": "1.3.1",

@@ -19,7 +19,7 @@
     "dev": "nodemon --delay 2500ms --watch ./",
     "lint": "eslint --ext .js modules plugins",
     "precommit": "yarn lint",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "yarn lint"
   },
   "bugs": {
     "url": "https://github.com/gregory-latinier/quasar-starter-kit/issues"
