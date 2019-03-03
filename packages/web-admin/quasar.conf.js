@@ -6,7 +6,8 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     boot: [
       'i18n',
-      'axios'
+      'axios',
+      { path: 'sentry', server: false }
     ],
 
     css: [
@@ -69,6 +70,7 @@ module.exports = function (ctx) {
     build: {
       env: {
         API: process.env.API,
+        SENTRY_DSN: process.env.SENTRY_DSN
       },
       scopeHoisting: true,
       // vueRouterMode: 'history',
