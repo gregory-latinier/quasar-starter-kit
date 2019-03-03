@@ -1,4 +1,7 @@
 # quasar-starter-kit
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/gregory-latinier/quasar-starter-kit.svg)](https://greenkeeper.io/)
+
 An opinionated starter kit for my projects, with Quasar 1.0 and HapiJS
 
 ### Install instructions
