@@ -1,4 +1,8 @@
 require('dotenv').config()
+
+const Sentry = require('@sentry/node')
+Sentry.init({ dsn: process.env.SENTRY_DSN })
+
 const Hapi = require('hapi')
 const AuthJWT = require('./plugins/auth-jwt')
 const { plugin: MongoDB } = require('./plugins/mongodb')

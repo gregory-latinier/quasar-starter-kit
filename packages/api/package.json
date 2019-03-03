@@ -25,6 +25,7 @@
     "url": "https://github.com/gregory-latinier/quasar-starter-kit/issues"
   },
   "dependencies": {
+    "@sentry/node": "4.6.4",
     "boom": "7.3.0",
     "change-case": "3.1.0",
     "dotenv": "6.2.0",
