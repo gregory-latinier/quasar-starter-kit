@@ -2,14 +2,24 @@
 import jwt from 'jsonwebtoken'
 import { mapMutations } from 'vuex'
 import { Cookies } from 'quasar'
+import { isEmail } from 'validator'
+import { validation } from 'src/mixins/validation'
 
 export default {
   name: 'page-login',
+  mixins: [validation],
   data () {
     return {
-      loginForm: {
+      form: {
         username: null,
         password: null
+      },
+      formRules: {
+        username: [
+          val => !!val || this.$t('validations.errors.required'),
+          val => isEmail(val) || this.$t('validations.errors.email')
+        ],
+        password: [val => !!val || this.$t('validations.errors.required')]
       },
       isPwd: true,
       submitting: false
@@ -18,6 +28,7 @@ export default {
   methods: {
     ...mapMutations('auth', ['setUsername']),
     async submit () {
+      if (!this.validate(this.formRules)) return
       this.submitting = true
       try {
         const response = await this.$axios({
@@ -27,7 +38,7 @@ export default {
           },
           url: `${process.env.API}/oauth/token`,
           method: 'post',
-          data: this.loginForm
+          data: this.form
         })
 
         const { access_token: accessToken, refresh_token: refreshToken } = response
@@ -75,16 +86,22 @@ q-page.flex.flex-center
   q-card.login-form
     q-card-section
       q-input(
-        v-model="loginForm.username"
+        ref="username"
+        v-model="form.username"
         type="email"
         stack-label
         :label="$t('form.fields.username')"
+        :rules="formRules.username"
+        lazy-rules
       )
       q-input(
-        v-model="loginForm.password"
+        ref="password"
+        v-model="form.password"
         :type="isPwd ? 'password' : 'text'"
         stack-label
         :label="$t('form.fields.password')"
+        :rules="formRules.password"
+        lazy-rules
       )
         q-icon(
           slot="append"
