@@ -80,7 +80,7 @@ const isEmailUsed = async (req, h) => {
   return h.response(await User.countDocuments({
     _id: { $ne: Mongoose.Types.ObjectId(req.payload._id) },
     username: req.payload.username
-  }))
+  }) === 0)
 }
 
 module.exports = {

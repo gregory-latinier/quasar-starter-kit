@@ -18,7 +18,8 @@ export default {
       formRules: {
         username: [
           val => !!val || this.$t('validations.errors.required'),
-          val => isEmail(val) || this.$t('validations.errors.email')
+          val => isEmail(val) || this.$t('validations.errors.email'),
+          async val => await this.isEmailUsed({ _id: this.form._id, username: val }) || this.$t('validations.errors.emailUsed')
         ],
         firstName: [val => !!val || this.$t('validations.errors.required')],
         lastName: [val => !!val || this.$t('validations.errors.required')]
@@ -71,6 +72,7 @@ q-page.flex.flex-center
         type="email"
         stack-label
         label="Email"
+        debounce="300"
         :rules="formRules.username"
         lazy-rules
       )
