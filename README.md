@@ -35,6 +35,13 @@ Change the JWT secret in the same API [.env](https://github.com/gregory-latinier
 JWT_SECRET=MyS3cR3t
 ```
 
+##### Add some sample data
+In the folder https://github.com/gregory-latinier/quasar-starter-kit/tree/develop/packages/database/sample-data you will find some users to init your database for test
+
+The default password used is `azerty01`
+
+Remember don't use this data for production!
+
 ### Let's roll
 
 In the root package run
