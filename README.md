@@ -59,7 +59,5 @@ Happy developing!
 
 ### Roadmap
 
-- Repo: Greenkeeper
-- Projects: Sentry logs
 - Client app: edit profile example
 - Sample micro service using the database package
