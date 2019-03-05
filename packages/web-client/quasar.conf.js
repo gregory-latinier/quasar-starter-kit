@@ -5,8 +5,9 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'i18n',
+      'auth',
       'axios',
+      'i18n',
       { path: 'sentry', server: false }
     ],
 

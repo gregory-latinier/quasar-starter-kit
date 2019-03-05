@@ -1,8 +1,6 @@
 <script>
-import jwt from 'jsonwebtoken'
-import { mapMutations } from 'vuex'
-import { Cookies } from 'quasar'
 import { isEmail } from 'validator'
+import { mapActions } from 'vuex'
 import { validation } from 'src/mixins/validation'
 
 export default {
@@ -26,56 +24,15 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', ['setUsername']),
+    ...mapActions('auth', ['login']),
     async submit () {
       if (!this.validate(this.formRules)) return
       this.submitting = true
-      try {
-        const response = await this.$axios({
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          url: `${process.env.API}/oauth/token`,
-          method: 'post',
-          data: this.form
-        })
-
-        const { access_token: accessToken, refresh_token: refreshToken } = response
-        const token = jwt.decode(accessToken)
-        // Only users can connect to the app, it will prevent admin accounts to use the app
-        if (token.scopes.includes('user')) {
-          let domain = window.location.hostname
-          domain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1) + 1)
-
-          Cookies.set('access_token', accessToken, {
-            path: '/',
-            domain
-          })
-          Cookies.set('refresh_token', refreshToken, {
-            path: '/',
-            domain
-          })
-          this.setUsername(token.username)
-          this.$router.push({
-            path: 'authenticated'
-          })
-        }
-      } catch (err) {
-        if (err.response.status === 400) {
-          let message = ''
-          err.response.data.forEach((error) => {
-            message += this.$t(`form.errors.${error.message}`, { field: this.$t(`form.fields.${error.field}`) }) + '\n'
-          })
-          this.$q.notify({
-            message,
-            color: 'negative',
-            icon: 'warning',
-            position: 'bottom-right'
-          })
-        }
-      }
+      await this.login(this.form)
       this.submitting = false
+      this.$router.push({
+        path: 'dashboard'
+      })
     }
   }
 }
@@ -90,7 +47,7 @@ q-page.flex.flex-center
         v-model="form.username"
         type="email"
         stack-label
-        :label="$t('form.fields.username')"
+        label="Email"
         :rules="formRules.username"
         lazy-rules
       )
@@ -99,7 +56,7 @@ q-page.flex.flex-center
         v-model="form.password"
         :type="isPwd ? 'password' : 'text'"
         stack-label
-        :label="$t('form.fields.password')"
+        label="Password"
         :rules="formRules.password"
         lazy-rules
       )
@@ -117,7 +74,3 @@ q-page.flex.flex-center
         :loading="submitting"
       )
 </template>
-
-<style lang="stylus">
-
-</style>
