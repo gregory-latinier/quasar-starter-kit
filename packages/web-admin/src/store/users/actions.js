@@ -1,77 +1,55 @@
-import axios from 'axios'
+import API from 'src/utils/api-wrapper'
 
 export const loadUsers = async (context, { page, rowsPerPage, sortBy, descending }) => {
-  const response = await axios({
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': context.rootState.auth.accessToken
-    },
+  const response = await API.call({
+    context,
     method: 'GET',
-    url: `${process.env.API}/v1/users?page=${page}&limit=${rowsPerPage}&col=${sortBy}&dir=${descending ? 'desc' : 'asc'}`
+    url: `/v1/users?page=${page}&limit=${rowsPerPage}&col=${sortBy}&dir=${descending ? 'desc' : 'asc'}`
   })
 
   context.commit('setUsers', {
-    users: response.data.data,
+    users: response.data,
     pagination: {
       page,
       rowsPerPage,
       sortBy,
       descending,
-      rowsNumber: response.data.total
+      rowsNumber: response.total
     }
   })
 }
 
 export const updateField = async (context, form) => {
   const { id, ...data } = form
-  const response = await axios({
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': context.rootState.auth.accessToken
-    },
+  const response = await API.call({
+    context,
     method: 'POST',
-    url: `${process.env.API}/v1/users/field/${id}`,
+    url: `/v1/users/field/${id}`,
     data
   })
-  if (response.data.success) {
+  if (response.success) {
     context.commit('updateField', form)
   }
 }
 
-export const loadUser = async (context, id) => {
-  const response = await axios({
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': context.rootState.auth.accessToken
-    },
+export const loadUser = async (context, id) =>
+  API.call({
+    context,
     method: 'GET',
-    url: `${process.env.API}/v1/users/${id}`
+    url: `/v1/users/${id}`
   })
-  return response.data
-}
 
-export const saveUser = async (context, data) => {
-  const response = await axios({
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': context.rootState.auth.accessToken
-    },
+export const saveUser = async (context) =>
+  API.call({
+    context,
     method: 'POST',
-    url: `${process.env.API}/v1/users`,
+    url: '/v1/users'
+  })
+
+export const isEmailUsed = async (context, data) =>
+  API.call({
+    context,
+    method: 'POST',
+    url: '/v1/users/isemailused',
     data
   })
-  return response.data
-}
-
-export const isEmailUsed = async (context, data) => {
-  const response = await axios({
-    headers: {
-      'Accept': 'application/json',
-      'Authorization': context.rootState.auth.accessToken
-    },
-    method: 'POST',
-    url: `${process.env.API}/v1/users/isemailused`,
-    data
-  })
-  return response.data
-}
