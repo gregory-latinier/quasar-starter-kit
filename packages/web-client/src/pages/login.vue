@@ -28,7 +28,10 @@ export default {
     async submit () {
       if (!this.validate(this.formRules)) return
       this.submitting = true
-      await this.login(this.form)
+      await this.login({
+        ...this.form,
+        grant_type: 'password'
+      })
       this.submitting = false
       this.$router.push({
         path: 'dashboard'

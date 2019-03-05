@@ -47,30 +47,57 @@ const generateRefreshToken = (uid) => JWT.sign({ uid }, process.env.JWT_SECRET)
  * @author Grégory LATINIER
  */
 const token = async (req, h) => {
-  const user = await User.findOne({ username: req.payload.username })
-  if (user && user.checkPassword(req.payload.password)) {
-    const tokenData = {
-      uid: user._id,
-      username: user.username,
-      scopes: user.scopes
+  const { grant_type: grantType } = req.payload
+  if (grantType === 'password') {
+    const user = await User.findOne({ username: req.payload.username })
+    if (user && user.checkPassword(req.payload.password)) {
+      const tokenData = {
+        uid: user._id,
+        username: user.username,
+        scopes: user.scopes
+      }
+
+      const refreshToken = generateRefreshToken(user._id)
+
+      await RefreshToken.create({
+        token: refreshToken,
+        user: user._id
+      })
+
+      return h.response({
+        token_type: 'bearer',
+        access_token: generateAccessToken(tokenData),
+        expires_in: 30,
+        refresh_token: refreshToken
+      })
     }
 
-    const refreshToken = generateRefreshToken(user._id)
-
-    await RefreshToken.create({
-      token: refreshToken,
-      user: user._id
-    })
-
-    return h.response({
-      token_type: 'bearer',
-      access_token: generateAccessToken(tokenData),
-      expires_in: 30,
-      refresh_token: refreshToken
-    })
+    throw Boom.badData('auth.wrongUserPassword')
+  } else if (grantType === 'refresh_token') {
+    const { code } = req.payload
+    let decoded
+    try {
+      decoded = JWT.verify(code, process.env.JWT_SECRET)
+    } catch (e) {
+      throw Boom.badData('auth.tokenInvalid')
+    }
+    const refreshToken = await RefreshToken.findOne({ token: code, user: decoded.uid }).populate('user')
+    if (refreshToken) {
+      const tokenData = {
+        uid: refreshToken.user._id,
+        username: refreshToken.user.username,
+        scopes: refreshToken.user.scopes
+      }
+      return h.response({
+        token_type: 'bearer',
+        access_token: generateAccessToken(tokenData),
+        expires_in: 30,
+        refresh_token: code
+      })
+    }
+    throw Boom.badData('auth.tokenRevoked')
   }
-
-  throw Boom.badData('auth.wrongUserPassword')
+  throw Boom.badData('auth.wrongGrantType')
 }
 
 const revoke = async (req, h) => {
