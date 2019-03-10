@@ -45,6 +45,41 @@ The default password used is `azerty01`
 
 Remember don't use this data for production!
 
+### Reverse proxy
+
+As both admin and client webapp use the same domain, localhost, you won't be able to develop both apps at the same time unless you use a reverse proxy because the access token is stored in a cookie.
+
+A way to fix this is is to use nginx for example.
+
+Here is a sample conf
+
+```
+server {
+	client_max_body_size 4G;
+	listen       80;
+	server_name  dev.qsk.com;
+
+	location / {
+		proxy_pass        http://localhost:8080;
+		proxy_redirect  off;
+		proxy_set_header        Host            $host;
+		proxy_set_header        X-Real-IP       $remote_addr;
+		proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+	}
+}
+```
+Include this in your nginx.conf, replace the server name with your domain.
+Update your host file with
+
+```
+127.0.0.1 dev.qsk.com
+127.0.0.1 dev.admin.qsk.com
+127.0.0.1 dev.api.qsk.com
+```
+
 ### Let's roll
 
 In the root package run

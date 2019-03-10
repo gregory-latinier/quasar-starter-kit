@@ -43,8 +43,6 @@ export default class API {
           const { access_token: accessToken, refresh_token: refreshToken } = response.data
           const token = jwt.decode(accessToken)
           let domain = window.location.hostname
-          domain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1) + 1)
-
           Cookies.set('access_token', accessToken, {
             path: '/',
             domain
