@@ -13,6 +13,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
+    "@qsk/common": "^0.0.0",
     "quasar": "1.0.0-beta.9"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import API from 'src/utils/api-wrapper'
+import API from '@qsk/common/utils/api-wrapper'
 
 export const loadUsers = async (context, { page, rowsPerPage, sortBy, descending }) => {
   const response = await API.call({

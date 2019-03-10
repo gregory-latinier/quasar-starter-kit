@@ -1,4 +1,4 @@
-import API from 'src/utils/api-wrapper'
+import API from '@qsk/common/utils/api-wrapper'
 import jwt from 'jsonwebtoken'
 import { Cookies } from 'quasar'
 
