@@ -16,8 +16,6 @@ export const login = async (context, data) => {
     // Only users can connect to the app, it will prevent admin accounts to use the app
     if (token.scopes.includes('user')) {
       let domain = window.location.hostname
-      domain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1) + 1)
-
       Cookies.set('access_token', accessToken, {
         path: '/',
         domain

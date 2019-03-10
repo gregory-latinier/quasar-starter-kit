@@ -14,7 +14,6 @@ export default async ({ ssrContext, store }) => {
     // This will prevent an admin account to connect to the client app
     } else {
       let domain = process.env.SERVER ? ssrContext.req.headers.host : window.location.hostname
-      domain = domain.substring(domain.lastIndexOf('.', domain.lastIndexOf('.') - 1) + 1)
       cookies.remove('access_token', { path: '/', domain })
       cookies.remove('refresh_token', { path: '/', domain })
     }
