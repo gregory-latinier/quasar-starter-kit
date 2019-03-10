@@ -1,0 +1,19 @@
+{
+  "name": "@qsk/common",
+  "version": "0.0.0",
+  "description": "QSK Common",
+  "keywords": [],
+  "author": "gregory-latinier <gregory.latinier@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregory-latinier/quasar-starter-kit.git"
+  },
+  "scripts": {
+    "test": "echo 0"
+  },
+  "bugs": {
+    "url": "https://github.com/gregory-latinier/quasar-starter-kit/issues"
+  },
+  "homepage": "https://github.com/gregory-latinier/quasar-starter-kit#readme"
+}
