@@ -19,7 +19,9 @@ routes.push([
     path: '/oauth/revoke',
     handler: (req, h) => Handlers.revoke(req, h),
     options: {
-      tags: ['auth']
+      auth: false,
+      tags: ['auth'],
+      validate: Validate.revoke
     }
   },
   {

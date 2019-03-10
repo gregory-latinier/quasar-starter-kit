@@ -100,9 +100,18 @@ const token = async (req, h) => {
   throw Boom.badData('auth.wrongGrantType')
 }
 
+/**
+ * Delete the refresh token
+ *
+ * @param req.payload.token {String} - refresh token
+ * @param h {Object} - response
+ *
+ * @returns boolean
+ * @author Grégory LATINIER
+ */
 const revoke = async (req, h) => {
-  // TODO
-  return h.response()
+  const result = await RefreshToken.deleteOne({ token: req.payload.token })
+  return h.response(result.n === 1)
 }
 
 const me = async (req, h) => {

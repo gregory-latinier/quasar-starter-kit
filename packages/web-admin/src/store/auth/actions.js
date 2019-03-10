@@ -39,3 +39,19 @@ export const login = async (context, data) => {
     console.log(err)
   }
 }
+
+export const logout = async function (context) {
+  await API.call({
+    context,
+    method: 'POST',
+    url: '/oauth/revoke',
+    data: {
+      token: Cookies.get('refresh_token')
+    }
+  })
+  Cookies.remove('access_token')
+  Cookies.remove('refresh_token')
+  context.commit('clearAuth')
+  // Not using an arrow function give us access to the '$router' thanks to 'this'
+  this.$router.push({ path: '/' })
+}
