@@ -1,6 +1,11 @@
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'layout-menu'
+  name: 'layout-menu',
+  methods: {
+    ...mapActions('auth', ['logout'])
+  }
 }
 </script>
 
@@ -31,7 +36,15 @@ q-scroll-area.fit
         q-item-section(avatar)
           q-icon(color="white" name="list")
         q-item-section Clients list
-
+  q-list
+    q-item(
+      dense
+      clickable
+      @click="logout"
+    )
+      q-item-section(avatar)
+        q-icon(color="white" name="exit_to_app")
+      q-item-section Log out
 </template>
 
 <style lang="stylus">

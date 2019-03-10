@@ -27,6 +27,13 @@ const token = {
   }
 }
 
+const revoke = {
+  payload: {
+    token: Joi.string().trim().required()
+  }
+}
+
 module.exports = {
-  token
+  token,
+  revoke
 }

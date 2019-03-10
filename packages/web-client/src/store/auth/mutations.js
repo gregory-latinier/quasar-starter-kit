@@ -3,3 +3,9 @@ export const setAuth = (state, { username, accessToken, refreshToken }) => {
   state.accessToken = accessToken
   state.refreshToken = refreshToken
 }
+
+export const clearAuth = (state) => {
+  state.username = null
+  state.accessToken = null
+  state.refreshToken = null
+}
