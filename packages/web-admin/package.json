@@ -27,7 +27,7 @@
     "eslint": "5.15.1",
     "eslint-loader": "2.1.2",
     "eslint-plugin-vue": "5.2.2",
-    "jsonwebtoken": "8.5.0",
+    "jsonwebtoken": "8.5.1",
     "pug": "2.0.3",
     "pug-plain-loader": "1.0.0",
     "strip-ansi": "3.0.1",
