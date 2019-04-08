@@ -35,7 +35,7 @@
     "hapi-mongoose2": "2.0.2",
     "joi": "14.3.1",
     "jsonwebtoken": "8.5.1",
-    "mongoose": "5.4.22",
+    "mongoose": "5.4.23",
     "ramda": "0.26.1"
   },
   "devDependencies": {
