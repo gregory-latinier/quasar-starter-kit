@@ -1289,10 +1289,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
   integrity sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
 
-hapi-auth-jwt2@8.3.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/hapi-auth-jwt2/-/hapi-auth-jwt2-8.3.0.tgz#6bff61c7eee647e5cb2c90dcfdaef1efaaf82c43"
-  integrity sha512-kgqIvkvfxP6+CWOadFFyLnQGft49pnxoSiD9DB9p0/xuj1ZM49O/U/hTOoYLgQf4Kyvvn+z2pDwfHAwJRdfvUg==
+hapi-auth-jwt2@8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/hapi-auth-jwt2/-/hapi-auth-jwt2-8.4.0.tgz#6f327e04c963bac65a3110eb99e4e1d157116a5a"
+  integrity sha512-qoLDyiQ66NKCuUSqBDIlz8nChQLHI7VU9apz/AZ3a0kZJtBovRRIlqi1SRVrq7dJGIW/kRPIpf76Y14zQAdJwQ==
   dependencies:
     boom "^7.1.1"
     cookie "^0.3.1"
