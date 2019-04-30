@@ -20,6 +20,6 @@
     "url": "https://github.com/gregory-latinier/quasar-starter-kit/issues"
   },
   "dependencies": {
-    "mongoose": "5.5.4"
+    "mongoose": "5.5.5"
   }
 }
