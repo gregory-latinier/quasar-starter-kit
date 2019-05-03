@@ -28,7 +28,7 @@
     "@hapi/boom": "7.4.2",
     "@hapi/hapi": "18.3.1",
     "@hapi/joi": "15.0.1",
-    "@sentry/node": "5.1.0",
+    "@sentry/node": "5.1.2",
     "change-case": "3.1.0",
     "dotenv": "8.0.0",
     "glob": "7.1.3",
